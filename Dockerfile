@@ -108,7 +108,11 @@ RUN echo "export LM_LICENSE_FILE=/root/resources/license.dat" >> /root/.bashrc
 RUN echo "export ALTERAD_LICENSE_FILE=/root/resources/license.dat" >> /root/.bashrc
 RUN echo "alias quartus_no_crash='LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 /opt/quartus/quartus/bin/quartus'" >> /root/.bashrc
 RUN echo "" >> /root/.bashrc
-RUN echo "alias activate_quartus_license='ip link add eth9 type dummy && ip link set eth9 address $(cat /root/resources/mac)'" >> /root/.bashrc
+RUN echo "alias activate_quartus_license='ip link add eth9 type dummy > /dev/null 2>&1 && ip link set eth9 address $(cat /root/resources/mac) > /dev/null 2>&1 '" >> /root/.bashrc
+RUN echo "" >> /root/.bashrc
+RUN echo "export LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1" >> /root/.bashrc
+RUN echo "" >> /root/.bashrc
+RUN echo "activate_quartus_license" >> /root/.bashrc
 
 # Git initial configuration
 RUN git config --global user.name "Docker Build"
