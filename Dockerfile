@@ -29,6 +29,9 @@ RUN apt-get install -y \
                     libreadline-dev \
                     lsb-core \
                     python-six \
+                    libboost-dev \
+                    libsigc++-2.0-dev \
+                    xsltproc \
                     ca-certificates \
                     libc6-dev-i386 \
                     lib32z1 \
@@ -116,6 +119,7 @@ RUN echo "" >> $BASHRC
 RUN echo "export LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1" >> $BASHRC
 RUN echo "" >> $BASHRC
 RUN echo "activate_quartus_license" >> $BASHRC
+RUN echo "" >> $BASHRC
 
 # Git initial configuration
 RUN git config --global user.name "Docker Build"
