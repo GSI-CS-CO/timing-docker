@@ -2,13 +2,15 @@
 
 ## Purpose
 
-TL;DR: If you can't compile or synthesize bel_projects (because your distribution has dropped Python2 support or uses a recent GCC version, ...) this will help you out.
+TL;DR: This is a Docker container image which is used for building bel_projects.
+
+If you can't compile or synthesize bel_projects (because your distribution has dropped Python2 support or uses a recent GCC version, ...) this will help you out. Even Etherbone and Saftlib can be compiled without problems.
 
 ## Prerequisites
 
 - Valid Quartus license
 - Quartus installation on your host (18.1 recommended)
-- Docker
+- Docker environment
 
 ### Quartus License
 
@@ -17,25 +19,24 @@ Here comes the tricky part:
 1. Use the Makefile target to copy your license into the container:
 
 <pre>
-$ make copy_license LICENSE_FILE=/home/user/path_to_your_license_file/license.dat
-$ make build
+$ make copy_license LICENSE_FILE=/home/user/___path_to_your_license_file___/license.dat
+$ OPTIONAL: make build
 </pre>
 
-2. Give your container the right MAC address (used by your Quartus License)
+2. Give your container the right MAC address (used by your Quartus license):
 
 <pre>
-$ make create_mac MAC_ADDR=00:11:22:aa:bb:cc
-$ make build
+$ make create_mac MAC_ADDR=___your_mac_address___ # format: 01:23:45:67:89:ab
+$ OPTIONAL: make build
 </pre>
 
-3. Start the container and run "activate_quartus_license"
+3. Start the container:
 
 <pre>
-$ make QUARTUS_DIR=/opt/quartus/ # on your host ***
-$ activate_quartus_license # inside your container
+$ make QUARTUS_DIR=/opt/quartus/___path_to_your_quartus_directory___/ # on your host ***
 </pre>
 
-*** Expected structure in your Quartus directory:
+*** Expected structure in your Quartus directory (example):
 <pre>
 ls -la /opt/quartus
 total 40
@@ -51,16 +52,16 @@ drwxrwxr-x. 16 root quartus 4096 Nov 23  2018 quartus/
 drwxrwxr-x.  2 root quartus 4096 Nov 23  2018 uninstall/
 </pre>
 
-4. Test if everything works
+4. Test if everything works:
 
 <pre>
 $ cd workspace # inside you container
 $ OPTIONAL: ./start.sh # inside your container ***
 $ OPTIONAL: cd bel_projects # inside your container
-$ OTTIONAL: LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 make exploder5
+$ OTTIONAL: make exploder5 # inside your container
 </pre>
 
-*** This will build etherbone and saftlib
+*** This will build Etherbone/Saftlib/tools and handle the GIT flow.
 
 ### Docker
 
@@ -82,11 +83,11 @@ $ sudo systemctl stop docker
 
 ## Common Problems
 
-### How can I get my builds?
+### Where can I get my builds?
 
-Just work inside workspace directory, this will be mounted.
+Just work inside the workspace directory, this will be mounted.
 
-### Quartus or Make Target crashes (core dumped)
+### Quartus or make target crashes (core dumped)
 
 Solution:
 
