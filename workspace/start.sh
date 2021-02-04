@@ -5,7 +5,6 @@ then
 else
   echo "Info: Cloning bel_projects ..."
   git clone https://github.com/GSI-CS-CO/bel_projects.git
-  chmod -R o+rwx bel_projects   
   cd bel_projects
   make
   make etherbone
@@ -14,4 +13,5 @@ else
   make saftlib-install
   make tools
   make tools-install
+  chmod -R o+rwx .
 fi
