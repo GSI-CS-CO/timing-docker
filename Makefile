@@ -44,5 +44,5 @@ run:
 
 clean:
 	rm -rf $(WORKSPACE_DIR)/$(REPO_NAME) || true
-	rm $(RESOURCES_DIR)/license.dat || true
+	rm $(RESOURCES_DIR)/*.dat || true
 	rm $(RESOURCES_DIR)/mac || true
