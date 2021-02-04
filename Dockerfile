@@ -5,6 +5,9 @@ FROM ubuntu:18.04
 ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
 
+# Variables
+ARG BASHRC=/root/.bashrc
+
 # Add i386 architecture (Quartus needs this)
 RUN dpkg --add-architecture i386
 
@@ -94,25 +97,25 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Prepare build environment
-RUN echo "" >> /root/.bashrc
-RUN echo "export QUARTUS=/opt/quartus/quartus" >> /root/.bashrc
-RUN echo "export QSYS_ROOTDIR=/opt/quartus/quartus/sopc_builder/bin" >> /root/.bashrc
-RUN echo "export QUARTUS_ROOTDIR=/opt/quartus/quartus" >> /root/.bashrc
-RUN echo "export QUARTUS_BINDIR=/opt/quartus/quartus/bin" >> /root/.bashrc
-RUN echo "export QUARTUS_64BIT=1" >> /root/.bashrc
-RUN echo "export PATH=$PATH:/opt/quartus/quartus" >> /root/.bashrc
-RUN echo "export PATH=$PATH:/opt/quartus/quartus/sopc_builder/bin" >> /root/.bashrc
-RUN echo "export PATH=$PATH:/opt/quartus/quartus/bin" >> /root/.bashrc
-RUN echo "" >> /root/.bashrc
-RUN echo "export LM_LICENSE_FILE=/root/resources/license.dat" >> /root/.bashrc
-RUN echo "export ALTERAD_LICENSE_FILE=/root/resources/license.dat" >> /root/.bashrc
-RUN echo "alias quartus_no_crash='LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 /opt/quartus/quartus/bin/quartus'" >> /root/.bashrc
-RUN echo "" >> /root/.bashrc
-RUN echo "alias activate_quartus_license='ip link add eth9 type dummy > /dev/null 2>&1 && ip link set eth9 address $(cat /root/resources/mac) > /dev/null 2>&1 '" >> /root/.bashrc
-RUN echo "" >> /root/.bashrc
-RUN echo "export LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1" >> /root/.bashrc
-RUN echo "" >> /root/.bashrc
-RUN echo "activate_quartus_license" >> /root/.bashrc
+RUN echo "" >> $BASHRC
+RUN echo "export QUARTUS=/opt/quartus/quartus" >> $BASHRC
+RUN echo "export QSYS_ROOTDIR=/opt/quartus/quartus/sopc_builder/bin" >> $BASHRC
+RUN echo "export QUARTUS_ROOTDIR=/opt/quartus/quartus" >> $BASHRC
+RUN echo "export QUARTUS_BINDIR=/opt/quartus/quartus/bin" >> $BASHRC
+RUN echo "export QUARTUS_64BIT=1" >> $BASHRC
+RUN echo "export PATH=$PATH:/opt/quartus/quartus" >> $BASHRC
+RUN echo "export PATH=$PATH:/opt/quartus/quartus/sopc_builder/bin" >> $BASHRC
+RUN echo "export PATH=$PATH:/opt/quartus/quartus/bin" >> $BASHRC
+RUN echo "" >> $BASHRC
+RUN echo "export LM_LICENSE_FILE=/root/resources/license.dat" >> $BASHRC
+RUN echo "export ALTERAD_LICENSE_FILE=/root/resources/license.dat" >> $BASHRC
+RUN echo "alias quartus_no_crash='LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 /opt/quartus/quartus/bin/quartus'" >> $BASHRC
+RUN echo "" >> $BASHRC
+RUN echo "alias activate_quartus_license='ip link add eth9 type dummy > /dev/null 2>&1 && ip link set eth9 address $(cat /root/resources/mac) > /dev/null 2>&1 '" >> $BASHRC
+RUN echo "" >> $BASHRC
+RUN echo "export LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1" >> $BASHRC
+RUN echo "" >> $BASHRC
+RUN echo "activate_quartus_license" >> $BASHRC
 
 # Git initial configuration
 RUN git config --global user.name "Docker Build"
