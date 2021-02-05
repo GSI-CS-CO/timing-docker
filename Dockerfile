@@ -106,9 +106,7 @@ RUN echo "export QSYS_ROOTDIR=/opt/quartus/quartus/sopc_builder/bin" >> $BASHRC
 RUN echo "export QUARTUS_ROOTDIR=/opt/quartus/quartus" >> $BASHRC
 RUN echo "export QUARTUS_BINDIR=/opt/quartus/quartus/bin" >> $BASHRC
 RUN echo "export QUARTUS_64BIT=1" >> $BASHRC
-RUN echo "export PATH=$PATH:/opt/quartus/quartus" >> $BASHRC
-RUN echo "export PATH=$PATH:/opt/quartus/quartus/sopc_builder/bin" >> $BASHRC
-RUN echo "export PATH=$PATH:/opt/quartus/quartus/bin" >> $BASHRC
+RUN echo "export PATH=$PATH:\$QUARTUS_ROOTDIR:\$QUARTUS_BINDIR:\$QSYS_ROOTDIR" >> $BASHRC
 RUN echo "" >> $BASHRC
 RUN echo "export LM_LICENSE_FILE=/root/resources/license.dat" >> $BASHRC
 RUN echo "export ALTERAD_LICENSE_FILE=/root/resources/license.dat" >> $BASHRC
