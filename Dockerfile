@@ -83,7 +83,9 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libmpfr.so.6 /usr/lib/x86_64-linux-gnu/libmp
 RUN mkdir /root/resources
 COPY resources/libpng12-0_1.2.54-1ubuntu1.1_amd64.deb /root/resources
 RUN dpkg -x /root/resources/libpng12-0_1.2.54-1ubuntu1.1_amd64.deb /root/resources/extract/
-RUN cp -f /root/resources/extract/lib/x86_64-linux-gnu/* /lib/x86_64-linux-gnu/
+RUN cp -f /root/resources/extract/lib/x86_64-linux-gnu/libpng12.so.0.54.0 /lib/x86_64-linux-gnu/
+RUN ln -s /lib/x86_64-linux-gnu/libpng12.so.0.54.0 /lib/x86_64-linux-gnu/libpng12.so.0
+RUN ln -s /lib/x86_64-linux-gnu/libpng12.so.0.54.0 /lib/x86_64-linux-gnu/libpng12.so
 
 # Install Quartus license
 COPY resources/license.dat /root/resources/license.dat
